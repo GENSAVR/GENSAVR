@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: email-server
+  template:
+    metadata:
+      labels:
+        app: email-server
+    spec:
+      containers:
+        - name: email-server
+          image: 10nutz/mail-service
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SMTP_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-credentials
+                  key: smtpEmail
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-credentials
+                  key: smtpPassword
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: email-server-service
+spec:
+  selector:
+    app: email-server
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081 
+  type: ClusterIP   
