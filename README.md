@@ -10,7 +10,10 @@ This repository contains all the deployment manifests created during the integra
    - [Mage AI](#2-mage-ai)
    - [AirSignal](#3-airsignal)
    - [Mail Service](#4-mail-service)
-3. [Final Words](#final-words)
+3. [Importing MageAI Pipelines](#importing-mage-ai-pipelines)
+4. [Enabling an API Trigger for Each Pipeline](#enabling-an-api-trigger-for-each-pipeline)
+5. [Overview of Pipelines](#overview-of-pipelines)
+6. [Final Words](#final-words)
 
 ---
 
@@ -102,7 +105,66 @@ kubectl apply -f deployment.yaml
 
 ---
 
+## Importing MageAI Pipelines
+
+Follow these steps to import a pipeline into the Pipelines Dashboard:
+
+1. **Access the Pipelines Dashboard:**  
+   Navigate to the Pipelines Dashboard by visiting `/pipelines`.
+
+2. **Create a New Pipeline:**  
+   Click the **+ New** button.
+
+3. **Select Import Option:**  
+   From the dropdown menu, choose **Import pipeline zip**.
+
+4. **Configure Overwrite Setting (Optional):**  
+   - Toggle the **Overwrite pipeline files** option **ON** if you want to replace any existing pipelines or overwrite conflicting block files.
+   - If this setting is left **OFF**, new pipelines and block files will be created if they already exist in the project.
+
+5. **Upload the Pipeline File:**  
+   - Click the file drop area to **select a file** from your system, or  
+   - **Drag and drop** the pipeline zip file into the file drop area.
+
+6. **Start the Import Process:**  
+   The pipeline import should begin automatically after uploading the file.
+
+By following these steps, your pipeline will be successfully imported and ready for use.
+For more information, visit the official [MageAI Documentation](https://docs.mage.ai/introduction/overview).
+
+## Enabling an API Trigger for Each Pipeline
+
+An **API-type trigger** instructs the pipeline to run when a specific API call is made.
+
+### Steps to Enable an API Trigger:
+
+1. **Create or Edit a Trigger:**
+   - Navigate to the trigger section of each pipeline in the UI.
+   - Create a new trigger or edit an existing one.
+
+2. **Select API Trigger Type:**
+   - Choose **API Trigger** as the trigger type.
+
+3. **Obtain the Endpoint:**
+   - After configuring the trigger, the system will provide a **POST endpoint URL**.
+
+4. **Make the API Call:**
+   - Send a **POST request** to the provided endpoint when you want to trigger the pipeline.
+   - Optionally, include **runtime variables** in your request payload for more customized execution.
+  
+## Overview of Pipelines
+
+Pipelines in GENSAVR power core features such as object transformations and real-time simulation adjustments. Two primary pipelines have been developed for integration into the system:
+
+1. **Model Transformation Pipeline:**  
+   This pipeline performs a **gearwheel cutting operation**, splitting the gearwheel object into two halves. The process automates object manipulation, enabling dynamic adjustments based on simulation needs.
+
+2. **Rotation Application Pipeline:**  
+   This pipeline applies a **rotation transformation** to a square object. It adjusts the object's quaternion values to simulate real-time movement, demonstrating object control and physics interactions.
+
+These pipelines enhance the training environment by ensuring responsive, data-driven changes based on user actions and simulation requirements.
+
 ## Final Words
-By following the steps outlined above, you can deploy GENSaVR's services seamlessly within a Kubernetes cluster. Each service enhances the platform's functionality, ensuring a dynamic, interactive, and scalable training environment for trainees.
+By following the steps outlined above, you can deploy GENSaVR's services seamlessly within a Kubernetes cluster. Each service enhances the platform's functionality, ensuring a dynamic, interactive, and scalable training environment for trainees. Additionally, **MageAI** plays a crucial role by enabling real-time data-driven insights and automating object transformations within the training simulations. This integration ensures adaptive learning scenarios, making the training experience more immersive and personalized.
 
 ---
