@@ -56,3 +56,18 @@ spec:
     hostPath:
       path: /mage_project
   serviceAccountName: mage-user
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mage-service
+  namespace: default
+spec:
+  selector:
+    app: mage-server
+  ports:
+    - protocol: TCP
+      port: 6789
+      targetPort: 6789
+  type: LoadBalancer
